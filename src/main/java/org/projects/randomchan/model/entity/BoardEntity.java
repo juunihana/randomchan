@@ -5,21 +5,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "threads")
+@Table(name = "boards")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ThreadEntity {
+public class BoardEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
-    private BoardEntity board;
+    @Column(name = "board_name")
+    private String name;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
-    private TagEntity tag;
+    private String description;
+
+    private LocalDateTime timeCreated;
 }

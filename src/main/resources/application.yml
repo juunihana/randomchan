@@ -1,8 +1,10 @@
+server:
+  port: 1337
 spring:
   datasource:
     driverClassName: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/randomchan
     username: postgres
-    password:
+    password: postgres
   flyway:
     locations: classpath:db/migration

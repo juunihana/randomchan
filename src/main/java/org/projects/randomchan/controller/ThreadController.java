@@ -51,14 +51,15 @@ public class ThreadController {
     @GetMapping("thread/{id}")
     public String getThread(@PathVariable("id") long id, Model model) {
         model.addAttribute("posts", postService.findAllByThreadId(id).stream()
-                .filter(PostBean::isThreadStarter)
                 .collect(Collectors.toList()));
-        model.addAttribute("newPost", new PostBean());
+        PostBean postBean = new PostBean();
+        postBean.setThread(threadService.findById(id));
+        model.addAttribute("newPost", postBean);
 
         return "thread";
     }
 
-    @PostMapping("thread/{id}")
+    @PostMapping("newPost/{id}")
     public String postToThread(@PathVariable("id") long id,
                                @ModelAttribute PostBean postBean) {
         postBean.setTimePosted(LocalDateTime.now());
@@ -66,6 +67,6 @@ public class ThreadController {
         postBean.setThread(threadService.findById(id));
         postService.save(postBean);
 
-        return "thread";
+        return "redirect:/thread/" + id;
     }
 }

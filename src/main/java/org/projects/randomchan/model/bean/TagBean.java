@@ -7,11 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ThreadBean {
+public class TagBean {
 
     private long id;
 
-    private BoardBean board;
+    private String name;
 
-    private TagBean tag;
+    private String description;
+
+    private BoardBean board;
 }

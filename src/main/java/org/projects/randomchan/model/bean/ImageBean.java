@@ -7,11 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ThreadBean {
+public class ImageBean {
 
     private long id;
 
-    private BoardBean board;
+    private String path;
 
-    private TagBean tag;
+    private boolean isNsfw;
+
+    private PostBean post;
 }

@@ -1,0 +1,56 @@
+modular imageboard
+    user can create configurations which consist of tags subscriptions, modules with different boards on left and right panels (screen split)
+    each configuration is open and is assigned a hashcode which according to user's decision can be stored in cookie or saved manually by user
+    users can share configurations
+    configurations not used in two weeks (?) are removed from DB
+    configurations modules:
+        picture packs
+        subcriptions
+
+this can be useful - taken if I'm intrested in #embedded and #nature and want to watch /b/ simultaneously but I don't wan't to see #nsfw threads I can set up configuration according to my needs
+e.g. I will have /b/ on the left side of my screen and embedded/nature threads on the right side which are updated in realtime (and I can configure whether updates are RT)
+and I can share my configuration to anyone who intrested in these things as well, but it will be completely anonymous
+
+another module is chat - users can communicate using their hashcodes therefore chatting is anonymous
+
+table boards:
+    id bigserial primary key not null
+    name varchar(3) not null
+    description varchar(100)
+    time_created timestamp
+    
+table tags:
+    id bigserial primary key not null
+    name varchar(20) not null --unique for each board
+    description text
+    board_id bigint foreign key(boards.id)
+    
+table threads:
+    id bigserial primary keynot null
+    board_id bigint foreign key(boards.id) not null
+    tag bigint foreign key(tags.id) not null
+    
+table posts:
+    id bigserial primary key not null
+    title text
+    content text not null
+    time_posted timestamp not null
+    thread_starter boolean
+    thread_id bigint foreign key(threads.id) not null
+
+table images:
+    id bigserial primary key not null
+    path varchar(100) unique not null
+    is_nsfw boolean not null
+    post_id bigint foreign key(posts.id) not null
+    
+table hashcodes:
+    id bigserial primary key not null
+    value varchar(16) unique not null
+    time_created timestamp not null
+    time_last_used timestamp not null
+
+table subscribe:
+    id bigserial primary key not null
+    hashcode_id bigint foreign key(hashcodes.id) not null
+    tag_id big int foreign key(tags.id) not null

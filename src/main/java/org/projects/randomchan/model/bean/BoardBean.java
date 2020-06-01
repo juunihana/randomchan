@@ -4,14 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ThreadBean {
+public class BoardBean {
 
     private long id;
 
-    private BoardBean board;
+    private String name;
 
-    private TagBean tag;
+    private String description;
+
+    private LocalDateTime timeCreated;
 }

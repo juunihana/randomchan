@@ -7,19 +7,20 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "threads")
+@Table(name = "images")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ThreadEntity {
+public class ImageEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
-    private BoardEntity board;
+    private String path;
+
+    private boolean isNsfw;
 
     @ManyToOne(cascade = {CascadeType.ALL})
-    private TagEntity tag;
+    private PostEntity post;
 }
