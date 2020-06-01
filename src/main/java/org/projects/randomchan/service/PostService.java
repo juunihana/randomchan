@@ -10,6 +10,8 @@ public interface PostService {
 
     List<PostBean> findAll();
 
+    List<PostBean> findAllByThreadId(long id);
+
     void save(PostBean postBean);
 
     void delete(PostBean postBean);

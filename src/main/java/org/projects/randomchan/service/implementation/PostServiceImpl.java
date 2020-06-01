@@ -37,6 +37,13 @@ public class PostServiceImpl implements PostService {
     }
 
     @Transactional
+    public List<PostBean> findAllByThreadId(long id) {
+        return postRepository.findAllByThreadId(id).stream()
+                .map(modelMapper::postEntityToPostBean)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
     public void save(PostBean postBean) {
         postRepository.save(modelMapper.postBeanToPostEntity(postBean));
     }
