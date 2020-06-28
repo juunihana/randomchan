@@ -37,8 +37,15 @@ public class ThreadServiceImpl implements ThreadService {
     }
 
     @Transactional
-    public void save(ThreadBean threadBean) {
-        threadRepository.save(modelMapper.threadBeanToThreadEntity(threadBean));
+    public List<ThreadBean> findAllByBoard(long id) {
+        return threadRepository.findAllByBoardId(id).stream()
+                .map(modelMapper::threadEntityToThreadBean)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public ThreadBean save(ThreadBean threadBean) {
+        return modelMapper.threadEntityToThreadBean(threadRepository.save(modelMapper.threadBeanToThreadEntity(threadBean)));
     }
 
     @Transactional

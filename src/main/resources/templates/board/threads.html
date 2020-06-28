@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="randomchan-container align-center randomchan-label">
+    <h3><a th:href="@{/board/a}">/a/</a>
+    <a th:href="@{/board/b}">/b/</a>
+    <a th:href="@{/board/d}">/d/</a>
+    <a th:href="@{/board/jp}">/jp/</a></h3>
+</div>
+<div class="randomchan-container align-center randomchan-label">
+    <h3><a th:href="@{/board/{boardName}(boardName=${board.name})}" th:text="${board.description}"></a></h3>
+</div>
+<div class="randomchan-container">
+    <form class="new-thread-form" th:action="@{/newThread}" th:object="${newThread}" method="POST">
+        <input type="hidden" th:value="${board}" th:name="board"/>
+        <table style="width: 100%">
+            <tr>
+                <td class="valign-center"><label class="randomchan-label" for="thread-title">Title</label></td>
+                <td><input class="input-text" type="text" id="thread-title" th:field="*{title}"/></td>
+            </tr>
+            <tr>
+                <td class="valign-top"><label class="randomchan-label" for="thread-content">Text</label></td>
+                <td><textarea class="input-text" id="thread-content" th:field="*{content}" rows="8"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button class="post-message-btn float-right" type="submit">Post</button></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div class="randomchan-container">
+    <div class="post" th:each="thread: ${threads}">
+        <div class="post-title">
+            <!--            <span class="post-name">Alice</span>-->
+            <span class="post-title" th:text="${thread.title}"></span>
+            <span class="post-time" th:text="${#temporals.format(thread.timePosted, 'dd, MMMM yyyy')}"></span>
+            <span class="float-right">
+                <span class="post-number" th:text="'#' + ${thread.id}"></span>
+                <span class="post-reply-button"><a
+                        th:href="@{/board/{boardName}/{threadId}(threadId=${thread.thread.id}, boardName=${board.name})}">[Reply]</a></span>
+            </span>
+        </div>
+        <div class="post-content" th:text="${thread.content}">
+            Hello World!
+        </div>
+    </div>
+</div>
+</body>
+</html>

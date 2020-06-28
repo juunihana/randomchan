@@ -37,6 +37,11 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Transactional
+    public BoardBean findByName(String name) {
+        return modelMapper.boardEntityToBoardBean(boardRepository.findByName(name));
+    }
+
+    @Transactional
     public void save(BoardBean boardBean) {
         boardRepository.save(modelMapper.boardBeanToBoardEntity(boardBean));
     }

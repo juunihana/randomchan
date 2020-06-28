@@ -12,7 +12,7 @@ public interface PostService {
 
     List<PostBean> findAllByThreadId(long id);
 
-    void save(PostBean postBean);
+    PostBean save(PostBean postBean);
 
     void delete(PostBean postBean);
 }

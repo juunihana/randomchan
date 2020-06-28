@@ -8,3 +8,5 @@ spring:
     password: postgres
   flyway:
     locations: classpath:db/migration
+  thymeleaf:
+    cache: false

@@ -10,6 +10,40 @@ body {
     /*border: solid 2px #e0e0e0;*/
 }
 
+.randomchan-container-500 {
+    width: 500px;
+    min-width: 500px;
+    margin: 0 auto 0 auto;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.align-justify {
+    text-align: justify;
+}
+
+.valign-top {
+    vertical-align: top;
+}
+
+.valign-center {
+    vertical-align: center;
+}
+
+.valign-bottom {
+    vertical-align: bottom;
+}
+
 :root {
     --post-border-color: #497eaf;
     --post-border-thickness: 0.04rem;
@@ -53,6 +87,7 @@ body {
 
 .post-content {
     font-size: var(--post-font-size-content);
+    padding-top: 5px;
 }
 
 /*.post-reply-button .post-hashcode {
@@ -79,32 +114,52 @@ body {
 }
 
 .input-text {
-    width: 500px;
-    min-width: 500px;
+    width: 99%;
+    /*min-width: 500px;*/
     padding: 5px;
-    background: #e0e0e0;
+    background-color: #00274dfa;
+    border: solid var(--post-border-thickness) var(--post-border-color);
+    border-radius: 4px;
     font-family: "Droid Sans Mono";
     font-size: 0.9rem;
     color: #ff4500;
 }
 
+.post-message-btn {
+    margin: 0;
+    padding: 5px 25px 5px 25px;
+    background-color: #00274dfa;
+    border: solid var(--post-border-thickness) var(--post-border-color);
+    border-radius: 4px;
+    font-family: "Droid Sans Mono";
+    font-size: 0.9rem;
+    color: #ff4500;
+    cursor: pointer;
+}
+
+.randomchan-label {
+    font-family: "Droid Sans Mono";
+    font-size: 0.9rem;
+    color: #e0e0e0;
+}
+
 a {
-    color: inherit;
+    color: #e0e0e0;
     text-decoration: none;
 }
 
 a:active {
-    color: inherit;
+    color: #e0e0e0;
     text-decoration: none;
 }
 
 a:visited {
-    color: inherit;
+    color: #e0e0e0;
     text-decoration: none;
 }
 
 a:hover {
-    color: orangered;
+    color: #ff4500;
     text-decoration: none;
     cursor: pointer;
 }

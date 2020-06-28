@@ -20,7 +20,7 @@ create table tags (
 create table threads (
     id          bigserial not null,
     board_id    bigint not null,
-    tag_id      bigint not null,
+    tag_id      bigint,
 
     primary key(id),
     foreign key(board_id) references boards(id),
@@ -48,3 +48,8 @@ create table images (
     primary key(id),
     foreign key(post_id) references posts(id)
 );
+
+insert into boards(id, board_name, description, time_created) values(DEFAULT, 'a', 'Anime', CURRENT_TIMESTAMP);
+insert into boards(id, board_name, description, time_created) values(DEFAULT, 'b', 'Random', CURRENT_TIMESTAMP);
+insert into boards(id, board_name, description, time_created) values(DEFAULT, 'd', 'Development', CURRENT_TIMESTAMP);
+insert into boards(id, board_name, description, time_created) values(DEFAULT, 'jp', 'Japanese Culture', CURRENT_TIMESTAMP);

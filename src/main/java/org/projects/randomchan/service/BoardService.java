@@ -10,6 +10,8 @@ public interface BoardService {
 
     List<BoardBean> findAll();
 
+    BoardBean findByName(String name);
+
     void save(BoardBean boardBean);
 
     void delete(BoardBean boardBean);

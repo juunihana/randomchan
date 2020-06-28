@@ -10,7 +10,9 @@ public interface ThreadService {
 
     List<ThreadBean> findAll();
 
-    void save(ThreadBean threadBean);
+    List<ThreadBean> findAllByBoard(long id);
+
+    ThreadBean save(ThreadBean threadBean);
 
     void delete(ThreadBean threadBean);
 }

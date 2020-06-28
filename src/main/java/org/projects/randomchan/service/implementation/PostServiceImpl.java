@@ -44,8 +44,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Transactional
-    public void save(PostBean postBean) {
-        postRepository.save(modelMapper.postBeanToPostEntity(postBean));
+    public PostBean save(PostBean postBean) {
+        return modelMapper.postEntityToPostBean(postRepository.save(modelMapper.postBeanToPostEntity(postBean)));
     }
 
     @Transactional

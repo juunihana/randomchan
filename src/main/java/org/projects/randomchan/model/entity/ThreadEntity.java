@@ -17,9 +17,9 @@ public class ThreadEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     private BoardEntity board;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     private TagEntity tag;
 }
