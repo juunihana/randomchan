@@ -11,7 +11,7 @@
     --post-border-thickness: 0.04rem;
 
     --post-font-size-title: 0.95rem;
-    --post-font-size-content: 0.85rem;
+    --post-font-size-content: 0.95rem;
 }
 
 body {
@@ -19,7 +19,7 @@ body {
 }
 
 .randomchan-container {
-    width: 960px;
+    width: 70%;
     min-width: 960px;
     margin: 0 auto 0 auto;
     /*padding: 10px;*/
@@ -89,14 +89,14 @@ menu li {
 }
 
 .post {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     padding: 10px 10px 20px 10px;
     background-color: var(--post-background-color);
     /*border: solid var(--post-border-thickness) var(--post-border-color);*/
     border-radius: var(--main-border-radius);
     font-family: var(--main-font-family);
-    font-size: 0.9rem;
+    font-size: var(--post-font-size-content);
     color: var(--main-font-color);
 }
 
@@ -145,7 +145,7 @@ menu li {
     border-radius: var(--main-border-radius);
     outline: none;
     font-family: var(--main-font-family);
-    font-size: 0.9rem;
+    font-size: var(--post-font-size-content);
     color: var(--main-font-color);
 }
 
@@ -153,10 +153,20 @@ menu li {
     width: 100%;
 }
 
-.post-message-btn {
+.btn {
     padding-left: 35px;
     padding-right: 35px;
     cursor: pointer;
+}
+
+.btn:hover {
+    color: #ff4500;
+}
+
+/*Button that is not outside */
+.btn-inner {
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .randomchan-label {

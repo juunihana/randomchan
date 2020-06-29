@@ -26,25 +26,12 @@
 <div class="randomchan-container">
     <form class="new-thread-form" th:action="@{/newThread}" th:object="${newThread}" method="POST">
         <input type="hidden" th:value="${board.name}" th:name="board"/>
-        <button class="form-input post-message-btn float-right" type="submit">Post</button>
-<!--        <label class="randomchan-label" for="thread-title">Title</label>-->
+        <button class="form-input btn float-right" type="submit">Post</button>
+        <a class="form-input btn float-left" th:href="@{/}">Main</a>
+        <a class="form-input btn btn-inner float-left" id="btn-back" onclick="window.history.back()">Back</a>
         <input class="form-input input-text" type="text" placeholder="Title" id="thread-title" th:field="*{title}"/>
-<!--        <label class="randomchan-label" for="thread-content">Text</label>-->
         <textarea class="form-input input-text" id="thread-content" placeholder="Title" th:field="*{content}" rows="8"></textarea>
 
-<!--        <table style="width: 100%">-->
-<!--            <tr>-->
-<!--                <td class="valign-center"><label class="randomchan-label" for="thread-title">Title</label></td>-->
-<!--                <td><input class="form-input input-text" type="text" id="thread-title" th:field="*{title}"/></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td class="valign-top"><label class="randomchan-label" for="thread-content">Text</label></td>-->
-<!--                <td><textarea class="form-input input-text" id="thread-content" th:field="*{content}" rows="8"></textarea></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td colspan="2"><button class="form-input post-message-btn float-right" type="submit">Post</button></td>-->
-<!--            </tr>-->
-<!--        </table>-->
     </form>
 </div>
 <div class="randomchan-container">
@@ -59,9 +46,7 @@
                         th:href="@{/board/{boardName}/{threadId}(threadId=${thread.thread.id}, boardName=${board.name})}">[Reply]</a></span>
             </span>
         </div>
-        <div class="post-content" th:text="${thread.content}">
-            Hello World!
-        </div>
+        <div class="post-content" th:utext="${#strings.replace(#strings.escapeXml(thread.content), T(java.lang.System).getProperty('line.separator'), '&lt;br /&gt')}"></div>
     </div>
 </div>
 </body>

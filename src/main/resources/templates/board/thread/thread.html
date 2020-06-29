@@ -27,7 +27,9 @@
     <form class="new-thread-form" th:action="@{/newPost}" th:object="${newPost}" method="POST">
         <input type="hidden" th:value="${board.name}" th:name="board"/>
         <input type="hidden" th:value="${threadId}" th:name="threadId"/>
-        <button class="form-input post-message-btn float-right" type="submit">Post</button>
+        <button class="form-input btn float-right" type="submit">Post</button>
+        <a class="form-input btn float-left" th:href="@{/}">Main</a>
+        <a class="form-input btn btn-inner float-left" id="btn-back" onclick="window.history.back()">Back</a>
         <!--        <label class="randomchan-label" for="thread-title">Title</label>-->
         <input class="form-input input-text" type="text" placeholder="Title" id="thread-title" th:field="*{title}"/>
         <!--        <label class="randomchan-label" for="thread-content">Text</label>-->
@@ -39,6 +41,7 @@
     <div class="post" th:each="post: ${posts}">
         <div class="post-header">
             <!--            <span class="post-name" th:if="${post.name == null}">Alice</span>-->
+            <span class="post-name" th:text="Anonymous"></span>
             <span class="post-title" th:text="${post.title}"></span>
             <span class="post-time" th:text="${#temporals.format(post.timePosted, 'dd, MMMM yyyy')}"></span>
             <span class="post-title" th:if="${post.threadStarter}" th:text="OP"></span>
@@ -47,9 +50,7 @@
                 <span class="post-reply-button"><a href="#">[Reply]</a></span>
             </span>
         </div>
-        <div class="post-content" th:text="${post.content}">
-            Hello World!
-        </div>
+        <div class="post-content" th:utext="${#strings.replace(#strings.escapeXml(post.content), T(java.lang.System).getProperty('line.separator'), '&lt;br /&gt')}"></div>
     </div>
 </div>
 </body>

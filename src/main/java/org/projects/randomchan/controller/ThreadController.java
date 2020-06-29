@@ -114,7 +114,7 @@ public class ThreadController {
     @PostMapping("/newPost")
     public String postToThread(@ModelAttribute PostBean postBean,
                                @RequestParam String board,
-                               @ModelAttribute long threadId) {
+                               @RequestParam long threadId) {
         postBean.setTimePosted(LocalDateTime.now());
         postBean.setThreadStarter(false);
         postBean.setThread(threadService.findById(threadId));
