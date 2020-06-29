@@ -8,11 +8,29 @@
     <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css" />
 </head>
 <body>
+<div class="randomchan-container align-center">
+    <div class="menu">
+        <span th:each="board: ${boards}">
+            <a class="board-menu-link" th:href="@{/board/{boardName}(boardName=${board.name})}"
+               th:text="'/' + ${board.name} + '/'"></a>
+        </span>
+        <div class="align-center randomchan-label">
+            <h3><a class="board-menu-link" th:href="@{/}">Randomchan</a></h3>
+        </div>
+    </div>
+</div>
+
 <div class="randomchan-container">
-    <a th:href="@{/board/a}">/a/</a>
-    <a th:href="@{/board/b}">/b/</a>
-    <a th:href="@{/board/d}">/d/</a>
-    <a th:href="@{/board/jp}">/jp/</a>
+    <div class="post">
+        <div class="post-header">
+            <div class="post-name">
+                About
+            </div>
+        </div>
+        <div class="post-content">
+            Randomchan - anonymous imageboard
+        </div>
+    </div>
 </div>
 </body>
 </html>

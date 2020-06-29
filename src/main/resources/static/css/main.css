@@ -1,5 +1,21 @@
+:root {
+    --main-font-family: Helvetica;
+    --main-font-color: #0f0f0f;
+    --main-background-color: #2f2f2f;
+    --main-border-radius: 8px;
+
+    --invert-font-color: #cfcfcf;
+
+    --post-background-color: #cfcfcf;
+    --post-border-color: #497eaf;
+    --post-border-thickness: 0.04rem;
+
+    --post-font-size-title: 0.95rem;
+    --post-font-size-content: 0.85rem;
+}
+
 body {
-    background-color: #0f0f0f;
+    background-color: var(--main-background-color);
 }
 
 .randomchan-container {
@@ -44,14 +60,6 @@ body {
     vertical-align: bottom;
 }
 
-:root {
-    --post-border-color: #497eaf;
-    --post-border-thickness: 0.04rem;
-
-    --post-font-size-title: 0.95rem;
-    --post-font-size-content: 0.85rem;
-}
-
 body {
     /*background: url('bg.jpg');*/
     /*background-color: #000d1a;*/
@@ -65,100 +73,135 @@ body {
     float: right;
 }
 
+.menu {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px 10px 5px 10px;
+    background-color: var(--post-background-color);
+    border-radius: var(--main-border-radius);
+    font-family: var(--main-font-family);
+    font-size: 1.1rem;
+    color: var(--main-font-color);
+}
+
+menu li {
+
+}
+
 .post {
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 10px 10px 20px 10px;
-    background-color: #00274dfa;
-    border: solid var(--post-border-thickness) var(--post-border-color);
-    border-radius: 4px;
-    font-family: "Droid Sans Mono";
+    background-color: var(--post-background-color);
+    /*border: solid var(--post-border-thickness) var(--post-border-color);*/
+    border-radius: var(--main-border-radius);
+    font-family: var(--main-font-family);
     font-size: 0.9rem;
-    color: #e0e0e0;
+    color: var(--main-font-color);
 }
 
-.post-title {
-    margin: 0 -10px 5px -10px;
-    padding: 0 10px 10px 10px;
-    border-bottom: solid var(--post-border-thickness) var(--post-border-color);
+.post-header {
+    margin: 0;
+    padding: 0;
     font-size: var(--post-font-size-title);
     /*border-bottom: solid 1px #cce6ff;*/
 }
 
 .post-content {
     font-size: var(--post-font-size-content);
-    padding-top: 5px;
+    margin-top: 10px;
 }
 
 /*.post-reply-button .post-hashcode {
 }*/
 
 .post-number {
-    color: green;
+    color: var(--main-font-color);
 }
 
 .post-name {
-    color: #cce6ff;
-}
-
-.post-title {
     color: #ff4500;
 }
 
+.post-title {
+    font-weight: bolder;
+}
+
 .post-time {
-    color: #cce6ff;
+    color: var(--main-font-color);
 }
 
 .new-thread-form {
     text-align: center;
 }
 
-.input-text {
-    width: 99%;
-    /*min-width: 500px;*/
-    padding: 5px;
-    background-color: #00274dfa;
-    border: solid var(--post-border-thickness) var(--post-border-color);
-    border-radius: 4px;
-    font-family: "Droid Sans Mono";
+.form-input {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px 10px 5px 10px;
+    box-sizing: border-box;
+    background-color: var(--post-background-color);
+    border: none;
+    border-radius: var(--main-border-radius);
+    outline: none;
+    font-family: var(--main-font-family);
     font-size: 0.9rem;
-    color: #ff4500;
+    color: var(--main-font-color);
+}
+
+.input-text {
+    width: 100%;
 }
 
 .post-message-btn {
-    margin: 0;
-    padding: 5px 25px 5px 25px;
-    background-color: #00274dfa;
-    border: solid var(--post-border-thickness) var(--post-border-color);
-    border-radius: 4px;
-    font-family: "Droid Sans Mono";
-    font-size: 0.9rem;
-    color: #ff4500;
+    padding-left: 35px;
+    padding-right: 35px;
     cursor: pointer;
 }
 
 .randomchan-label {
-    font-family: "Droid Sans Mono";
+    font-family: var(--main-font-family);
     font-size: 0.9rem;
-    color: #e0e0e0;
+    color: var(--invert-font-color);
 }
 
 a {
-    color: #e0e0e0;
+    color: var(--main-font-color);
     text-decoration: none;
 }
 
 a:active {
-    color: #e0e0e0;
+    color: var(--main-font-color);
     text-decoration: none;
 }
 
 a:visited {
-    color: #e0e0e0;
+    color: var(--main-font-color);
     text-decoration: none;
 }
 
 a:hover {
+    color: #ff4500;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.board-menu-link {
+    color: var(--main-font-color);
+    text-decoration: none;
+}
+
+.board-menu-link:active {
+    color: var(--main-font-color);
+    text-decoration: none;
+}
+
+.board-menu-link:visited {
+    color: var(--main-font-color);
+    text-decoration: none;
+}
+
+.board-menu-link:hover {
     color: #ff4500;
     text-decoration: none;
     cursor: pointer;

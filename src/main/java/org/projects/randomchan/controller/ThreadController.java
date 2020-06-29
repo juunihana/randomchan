@@ -39,7 +39,8 @@ public class ThreadController {
      * @return view
      */
     @GetMapping
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("boards", boardService.findAll());
         return "index";
     }
 
@@ -61,6 +62,7 @@ public class ThreadController {
         model.addAttribute("threads", postsByBoard);
         model.addAttribute("newThread", new PostBean());
         model.addAttribute("board", boardService.findByName(board));
+        model.addAttribute("boards", boardService.findAll());
 
         return "board/threads";
     }
@@ -72,16 +74,16 @@ public class ThreadController {
      * @return view
      */
     @PostMapping("/newThread")
-    public String newThread(@ModelAttribute("board") String board,
-            @ModelAttribute PostBean postBean) {
+    public String newThread(@RequestParam String board,
+                            @ModelAttribute PostBean postBean) {
         ThreadBean threadBean = new ThreadBean();
         threadBean.setBoard(boardService.findByName(board));
-        postBean.setThread(threadBean);
+        postBean.setThread(threadService.save(threadBean));
         postBean.setThreadStarter(true);
         postBean.setTimePosted(LocalDateTime.now());
         long threadId = postService.save(postBean).getThread().getId();
 
-        return "redirect:/" + board + "/" + threadId;
+        return "redirect:/board/" + board + "/" + threadId;
     }
 
     /**
@@ -98,6 +100,7 @@ public class ThreadController {
         model.addAttribute("newPost", new PostBean());
         model.addAttribute("board", boardService.findByName(board));
         model.addAttribute("threadId", threadService.findById(id).getId());
+        model.addAttribute("boards", boardService.findAll());
 
         return "board/thread/thread";
     }
@@ -110,13 +113,13 @@ public class ThreadController {
      */
     @PostMapping("/newPost")
     public String postToThread(@ModelAttribute PostBean postBean,
-                               @ModelAttribute("board") BoardBean board,
-                               @ModelAttribute("threadId") long threadId) {
+                               @RequestParam String board,
+                               @ModelAttribute long threadId) {
         postBean.setTimePosted(LocalDateTime.now());
         postBean.setThreadStarter(false);
         postBean.setThread(threadService.findById(threadId));
         postService.save(postBean);
 
-        return "redirect:/" + board.getName() + "/" + threadId;
+        return "redirect:/board/" + board + "/" + threadId;
     }
 }
