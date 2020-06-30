@@ -16,7 +16,6 @@
         </span>
         <div class="align-center randomchan-label">
             <h3>
-                <a class="board-menu-link" th:href="@{/}">Main page</a>
                 <a class="board-menu-link" th:href="@{/board/{boardName}(boardName=${board.name})}" th:text="${board.description}"></a>
             </h3>
         </div>
@@ -24,16 +23,17 @@
 </div>
 
 <div class="randomchan-container">
-    <form class="new-thread-form" th:action="@{/newPost}" th:object="${newPost}" method="POST">
+    <form class="new-thread-form" th:action="@{/newPost}" th:object="${newPost}" method="POST" enctype="multipart/form-data">
         <input type="hidden" th:value="${board.name}" th:name="board"/>
         <input type="hidden" th:value="${threadId}" th:name="threadId"/>
         <button class="form-input btn float-right" type="submit">Post</button>
-        <a class="form-input btn float-left" th:href="@{/}">Main</a>
-        <a class="form-input btn btn-inner float-left" id="btn-back" onclick="window.history.back()">Back</a>
+        <a class="form-input btn float-left" th:href="@{/}" th:text="'Main'"></a>
+        <a class="form-input btn btn-inner float-left" id="btn-back" onclick="window.history.back()" th:text="'Back'"></a>
         <!--        <label class="randomchan-label" for="thread-title">Title</label>-->
         <input class="form-input input-text" type="text" placeholder="Title" id="thread-title" th:field="*{title}"/>
         <!--        <label class="randomchan-label" for="thread-content">Text</label>-->
         <textarea class="form-input input-text" id="thread-content" placeholder="Title" th:field="*{content}" rows="8"></textarea>
+        <input class="form-input input-text" name="image" type="file">Image</input>
     </form>
 </div>
 
@@ -41,15 +41,17 @@
     <div class="post" th:each="post: ${posts}">
         <div class="post-header">
             <!--            <span class="post-name" th:if="${post.name == null}">Alice</span>-->
-            <span class="post-name" th:text="Anonymous"></span>
+            <span class="post-name" th:text="'Anonymous'"></span>
             <span class="post-title" th:text="${post.title}"></span>
-            <span class="post-time" th:text="${#temporals.format(post.timePosted, 'dd, MMMM yyyy')}"></span>
-            <span class="post-title" th:if="${post.threadStarter}" th:text="OP"></span>
+            <span>on</span>
+            <span class="post-time" th:text="${#temporals.format(post.timePosted, 'dd, MMMM yyyy HH:MM:SS')}"></span>
+            <span class="post-title" th:if="${post.threadStarter}" th:text="'[OP]'"></span>
             <span class="float-right">
                 <span class="post-number" th:text="'#' + ${post.id}"></span>
                 <span class="post-reply-button"><a href="#">[Reply]</a></span>
             </span>
         </div>
+        <img th:src="'/public/' + ${image.path}" alt="Not found" />
         <div class="post-content" th:utext="${#strings.replace(#strings.escapeXml(post.content), T(java.lang.System).getProperty('line.separator'), '&lt;br /&gt')}"></div>
     </div>
 </div>

@@ -16,7 +16,6 @@
         </span>
         <div class="align-center randomchan-label">
             <h3>
-                <a class="board-menu-link" th:href="@{/}">Main page</a>
                 <a class="board-menu-link" th:href="@{/board/{boardName}(boardName=${board.name})}" th:text="${board.description}"></a>
             </h3>
         </div>
@@ -27,8 +26,8 @@
     <form class="new-thread-form" th:action="@{/newThread}" th:object="${newThread}" method="POST">
         <input type="hidden" th:value="${board.name}" th:name="board"/>
         <button class="form-input btn float-right" type="submit">Post</button>
-        <a class="form-input btn float-left" th:href="@{/}">Main</a>
-        <a class="form-input btn btn-inner float-left" id="btn-back" onclick="window.history.back()">Back</a>
+        <a class="form-input btn float-left" th:href="@{/}" th:text="'Main'"></a>
+        <a class="form-input btn btn-inner float-left" id="btn-back" onclick="window.history.back()" th:text="'Back'"></a>
         <input class="form-input input-text" type="text" placeholder="Title" id="thread-title" th:field="*{title}"/>
         <textarea class="form-input input-text" id="thread-content" placeholder="Title" th:field="*{content}" rows="8"></textarea>
 
@@ -37,9 +36,10 @@
 <div class="randomchan-container">
     <div class="post" th:each="thread: ${threads}">
         <div class="post-header">
-            <span class="post-name" th:text="Anonymous"></span>
+            <span class="post-name" th:text="'Anonymous'"></span>
             <span class="post-title" th:text="${thread.title}"></span>
-            <span class="post-time" th:text="${#temporals.format(thread.timePosted, 'dd, MMMM yyyy')}"></span>
+            <span>on</span>
+            <span class="post-time" th:text="${#temporals.format(thread.timePosted, 'dd, MMMM yyyy HH:MM:SS')}"></span>
             <span class="float-right">
                 <span class="post-number" th:text="'#' + ${thread.id}"></span>
                 <span class="post-reply-button"><a

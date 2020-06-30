@@ -1,6 +1,10 @@
 server:
   port: 1337
 spring:
+  servlet:
+    multipart:
+      enabled: true
+      location: classpath:/public
   datasource:
     driverClassName: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/randomchan

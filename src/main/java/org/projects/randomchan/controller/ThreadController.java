@@ -1,16 +1,22 @@
 package org.projects.randomchan.controller;
 
 import org.projects.randomchan.model.bean.BoardBean;
+import org.projects.randomchan.model.bean.ImageBean;
 import org.projects.randomchan.model.bean.PostBean;
 import org.projects.randomchan.model.bean.ThreadBean;
 import org.projects.randomchan.service.BoardService;
+import org.projects.randomchan.service.ImageService;
 import org.projects.randomchan.service.PostService;
 import org.projects.randomchan.service.ThreadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,14 +29,17 @@ public class ThreadController {
     private final ThreadService threadService;
     private final PostService postService;
     private final BoardService boardService;
+    private final ImageService imageService;
 
     @Autowired
     public ThreadController(ThreadService threadService,
                             PostService postService,
-                            BoardService boardService) {
+                            BoardService boardService,
+                            ImageService imageService) {
         this.threadService = threadService;
         this.postService = postService;
         this.boardService = boardService;
+        this.imageService = imageService;
     }
 
     /**
@@ -101,6 +110,9 @@ public class ThreadController {
         model.addAttribute("board", boardService.findByName(board));
         model.addAttribute("threadId", threadService.findById(id).getId());
         model.addAttribute("boards", boardService.findAll());
+        ImageBean emptyImage = new ImageBean();
+        emptyImage.setPath("");
+        model.addAttribute("image", imageService.findById(1) != null ? imageService.findById(1) : emptyImage);
 
         return "board/thread/thread";
     }
@@ -114,11 +126,19 @@ public class ThreadController {
     @PostMapping("/newPost")
     public String postToThread(@ModelAttribute PostBean postBean,
                                @RequestParam String board,
-                               @RequestParam long threadId) {
+                               @RequestParam long threadId,
+                               @RequestParam MultipartFile image) throws IOException {
         postBean.setTimePosted(LocalDateTime.now());
         postBean.setThreadStarter(false);
         postBean.setThread(threadService.findById(threadId));
         postService.save(postBean);
+
+        String imageName = image.getOriginalFilename();
+        ImageBean imageBean = new ImageBean();
+        imageBean.setPath(imageName);
+        imageBean.setNsfw(false);
+        imageBean.setPost(postBean);
+        imageService.save(imageBean);
 
         return "redirect:/board/" + board + "/" + threadId;
     }
