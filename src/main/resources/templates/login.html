@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Login</h1>
+<div class="randomchan-container">
+    <form class="new-thread-form" th:action="@{/admin/login}" method="POST">
+        <input type="hidden" th:value="${board.name}" th:name="board"/>
+        <input type="hidden" th:value="${threadId}" th:name="threadId"/>
+        <button class="form-input btn float-right" type="submit">Login</button>
+        <a class="form-input btn float-left" th:href="@{/}">Main</a>
+        <!--        <label class="randomchan-label" for="thread-title">Title</label>-->
+        <input class="form-input input-text" type="text" placeholder="Username" name="username"/>
+        <!--        <label class="randomchan-label" for="thread-content">Text</label>-->
+        <input class="form-input input-text" type="password" placeholder="Password" name="password"/>
+    </form>
+</div>
+</body>
+</html>
